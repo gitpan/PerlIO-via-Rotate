@@ -1,2 +1,11 @@
+0.02	9 July 2002
+	Fixed some documentation nits reported by Rafael Garcia-Suarez.  Added
+	some more explanation as to why the eval module approach was taken.
+
+	Version number now a '' string (oops).
+
+	Added check so that module is not re-evalled if already available.
+	Adapted t/04basic.t to sort of check this.
+
 0.01    8 July 2002
 	First version.

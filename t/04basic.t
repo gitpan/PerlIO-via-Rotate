@@ -1,6 +1,7 @@
-use Test::More tests => 11;
+use Test::More tests => 12;
 
-BEGIN { use_ok('PerlIO::Via::Rotate',':all') }
+BEGIN { use_ok('PerlIO::Via::Rotate',1) }
+BEGIN { use_ok('PerlIO::Via::Rotate',1,2,3) } # shouldn't produce a warning
 
 my $file = 't/test.rot1';
 
