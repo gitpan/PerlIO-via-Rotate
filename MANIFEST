@@ -1,0 +1,11 @@
+MANIFEST
+CHANGELOG
+README
+TODO
+VERSION
+Makefile.PL
+lib/PerlIO/Via/Rotate.pm
+t/01basic.t
+t/02basic.t
+t/03basic.t
+t/04basic.t
