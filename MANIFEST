@@ -5,7 +5,7 @@ TODO
 VERSION
 Makefile.PL
 lib/PerlIO/via/Rotate.pm
-t/01basic.t
-t/02basic.t
-t/03basic.t
-t/04basic.t
+t/Rotate1.t
+t/Rotate2.t
+t/Rotate3.t
+t/Rotate4.t

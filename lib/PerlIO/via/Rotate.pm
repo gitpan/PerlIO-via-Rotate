@@ -1,12 +1,12 @@
 package PerlIO::via::Rotate;
 
-# Make sure we do things by the book
 # Make sure we don't have any strange encoding issues
+# Make sure we do things by the book from now on
 # Set the version info
 
+$VERSION = '0.04';
 use strict;
 use bytes;
-$PerlIO::via::Rotate::VERSION = '0.03';
 
 # Initialize the base rotational strings
 
@@ -64,7 +64,7 @@ sub import {
     foreach (@_) {
         die "Invalid rotational value: $_" if !m#^\d+$# or $_ < 0 or $_ > 26;
 	my $version = "PerlIO::via::rot$_\::VERSION";
-        next if defined( $$version );
+        {no strict 'refs'; next if defined( $$version );}
 
 #  Initialize the source of the module for this rotation
 

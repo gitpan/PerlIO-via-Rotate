@@ -1,9 +1,23 @@
+BEGIN {				# Magic Perl CORE pragma
+    if ($ENV{PERL_CORE}) {
+        chdir 't' if -d 't';
+        @INC = '../lib';
+    }
+    unless (find PerlIO::Layer 'perlio') {
+        print "1..0 # Skip: PerlIO not used\n";
+        exit 0;
+    }
+    if (ord("A") == 193) {
+        print "1..0 # Skip: EBCDIC\n";
+    }
+}
+
 use Test::More tests => 12;
 
 BEGIN { use_ok('PerlIO::via::Rotate',1) }
 BEGIN { use_ok('PerlIO::via::Rotate',1,2,3) } # shouldn't produce a warning
 
-my $file = 't/test.rot1';
+my $file = 'test.rot1';
 
 my $decoded = <<EOD;
 This is a test for rotated text that has hardly any special characters in it
@@ -49,7 +63,7 @@ ok( close( $test ),			'close test handle' );
 # Check decoding _with_ layers
 
 ok(
- open( my $in,'<:via(PerlIO::via::rot1)', $file ),
+ open( my $in,'<:via(rot1)', $file ),
  "opening '$file' for reading"
 );
 is( join( '',<$in> ),$decoded,		'check decoding' );
