@@ -4,7 +4,7 @@ package PerlIO::via::Rotate;
 # Make sure we do things by the book from now on
 # Set the version info
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 use strict;
 use bytes;
 
@@ -64,7 +64,7 @@ sub import {
     foreach (@_) {
         die "Invalid rotational value: $_" if !m#^\d+$# or $_ < 0 or $_ > 26;
 	my $version = "PerlIO::via::rot$_\::VERSION";
-        {no strict 'refs'; next if defined( $$version );}
+        no strict 'refs'; next if defined( $$version ); use strict 'refs';
 
 #  Initialize the source of the module for this rotation
 
@@ -192,12 +192,14 @@ PerlIO::via::Rotate module.
 L<PerlIO::via>, L<PerlIO::via::Base64>, L<PerlIO::via::MD5>,
 L<PerlIO::via::QuotedPrint>, L<PerlIO::via::StripHTML>.
 
+=head1 ACKNOWLEDGEMENTS
+
+Inspired by Crypt::Rot13.pm by Julian Fondren.
+
 =head1 COPYRIGHT
 
-Copyright (c) 2002 Elizabeth Mattijsen.  Inspired by Crypt::Rot13.pm by
-Julian Fondren.
-
-This library is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+Copyright (c) 2002-2003 Elizabeth Mattijsen.  All rights reserved.  This
+library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
