@@ -12,6 +12,8 @@ BEGIN {				# Magic Perl CORE pragma
     }
 }
 
+use strict;
+use warnings;
 use Test::More tests => 11;
 
 BEGIN { use_ok('PerlIO::via::Rotate',':all') }

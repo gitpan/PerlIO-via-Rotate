@@ -4,7 +4,7 @@ package PerlIO::via::Rotate;
 # Make sure we do things by the book from now on
 # Set the version info
 
-$VERSION = '0.05';
+$VERSION = '0.06';
 use strict;
 use bytes;
 
@@ -145,6 +145,8 @@ sub WRITE {
     (print {$_[2]} $_[1]) ? length($_[1]) : -1;
 } #WRITE
 
+#-----------------------------------------------------------------------
+
 __END__
 
 =head1 NAME
@@ -177,6 +179,10 @@ specify the rotations you would like to use as a list in the -use- statement.
 
 The special keyword ":all" can be specified in the -use- statement to indicate
 that all rotations between 0 and 26 inclusive should be allowed.
+
+=head1 REQUIRED MODULES
+
+ (none)
 
 =head1 CAVEATS
 

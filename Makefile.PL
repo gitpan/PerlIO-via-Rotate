@@ -1,6 +1,7 @@
 require 5.008;
 use Config;
 use ExtUtils::MakeMaker;
+eval "use Devel::Required";
 
 warn <<EOD unless $Config{useperlio};
     *** WHOA THERE!!! ***
@@ -11,9 +12,8 @@ EOD
 
 WriteMakefile (
  NAME		=> "PerlIO::via::Rotate",
- ($[ >= 5.005) ?
- (AUTHOR	=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
-  ABSTRACT	=> 'PerlIO Layer for rotational deviation') : (),
+ AUTHOR		=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
+ ABSTRACT	=> 'PerlIO Layer for rotational deviation',
  VERSION_FROM	=> 'lib/PerlIO/via/Rotate.pm',
  PREREQ_PM	=> {
                    },
