@@ -1,7 +1,7 @@
 use Test::More tests => 12;
 
-BEGIN { use_ok('PerlIO::Via::Rotate',1) }
-BEGIN { use_ok('PerlIO::Via::Rotate',1,2,3) } # shouldn't produce a warning
+BEGIN { use_ok('PerlIO::via::Rotate',1) }
+BEGIN { use_ok('PerlIO::via::Rotate',1,2,3) } # shouldn't produce a warning
 
 my $file = 't/test.rot1';
 
@@ -30,7 +30,7 @@ EOD
 # Create the encoded test-file
 
 ok(
- open( my $out,'>:Via(PerlIO::Via::rot1)', $file ),
+ open( my $out,'>:via(PerlIO::via::rot1)', $file ),
  "opening '$file' for writing"
 );
 
@@ -49,7 +49,7 @@ ok( close( $test ),			'close test handle' );
 # Check decoding _with_ layers
 
 ok(
- open( my $in,'<:Via(PerlIO::Via::rot1)', $file ),
+ open( my $in,'<:via(PerlIO::via::rot1)', $file ),
  "opening '$file' for reading"
 );
 is( join( '',<$in> ),$decoded,		'check decoding' );

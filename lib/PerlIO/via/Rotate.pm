@@ -1,4 +1,4 @@
-package PerlIO::Via::Rotate;
+package PerlIO::via::Rotate;
 
 # Make sure we do things by the book
 # Make sure we don't have any strange encoding issues
@@ -6,7 +6,7 @@ package PerlIO::Via::Rotate;
 
 use strict;
 use bytes;
-$PerlIO::Via::Rotate::VERSION = '0.02';
+$PerlIO::via::Rotate::VERSION = '0.03';
 
 # Initialize the base rotational strings
 
@@ -63,16 +63,16 @@ sub import {
 
     foreach (@_) {
         die "Invalid rotational value: $_" if !m#^\d+$# or $_ < 0 or $_ > 26;
-	my $version = "PerlIO::Via::rot$_\::VERSION";
+	my $version = "PerlIO::via::rot$_\::VERSION";
         next if defined( $$version );
 
 #  Initialize the source of the module for this rotation
 
         my $module = <<EOD;
-package PerlIO::Via::rot$_;
+package PerlIO::via::rot$_;
 use bytes;
-\@PerlIO::Via::rot$_\::ISA = 'PerlIO::Via::Rotate';
-\$$version = '$PerlIO::Via::Rotate::VERSION';
+\@PerlIO::via::rot$_\::ISA = 'PerlIO::via::Rotate';
+\$$version = '$PerlIO::via::Rotate::VERSION';
 EOD
 
 #  If there is an encoding string for this rotation
@@ -149,18 +149,18 @@ __END__
 
 =head1 NAME
 
-PerlIO::Via::Rotate - PerlIO layer for encoding using rotational deviation
+PerlIO::via::Rotate - PerlIO layer for encoding using rotational deviation
 
 =head1 SYNOPSIS
 
- use PerlIO::Via::Rotate;           # assume rot13 only
- use PerlIO::Via::Rotate 13,14,15;  # list rotations (rotxx) to be used
- use PerlIO::Via::Rotate ':all';    # allow for all possible rotations 0..26
+ use PerlIO::via::Rotate;           # assume rot13 only
+ use PerlIO::via::Rotate 13,14,15;  # list rotations (rotxx) to be used
+ use PerlIO::via::Rotate ':all';    # allow for all possible rotations 0..26
 
- open( my $in,'<:Via(rot13)','file.rotated' )
+ open( my $in,'<:via(rot13)','file.rotated' )
   or die "Can't open file.rotated for reading: $!\n";
  
- open( my $out,'>:Via(rot14)','file.rotated' )
+ open( my $out,'>:via(rot14)','file.rotated' )
   or die "Can't open file.rotated for writing: $!\n";
 
 =head1 DESCRIPTION
@@ -181,16 +181,16 @@ that all rotations between 0 and 26 inclusive should be allowed.
 =head1 CAVEATS
 
 This module is special insofar it serves as a front-end for 27 modules that
-are named "PerlIO::Via::rot0" through "PerlIO::Via::rot26" that are eval'd as
+are named "PerlIO::via::rot0" through "PerlIO::via::rot26" that are eval'd as
 appropriate when the module is -use-d.  The reason for this approach is that
 it is currently impossible to pass parameters to a PerlIO layer when opening
 a file.  The name of the module is the implicit parameter being passed to the
-PerlIO::Via::Rotate module.
+PerlIO::via::Rotate module.
 
 =head1 SEE ALSO
 
-L<PerlIO::Via>, L<PerlIO::Via::Base64>, L<PerlIO::Via::MD5>,
-L<PerlIO::Via::QuotedPrint>, L<PerlIO::Via::StripHTML>.
+L<PerlIO::via>, L<PerlIO::via::Base64>, L<PerlIO::via::MD5>,
+L<PerlIO::via::QuotedPrint>, L<PerlIO::via::StripHTML>.
 
 =head1 COPYRIGHT
 

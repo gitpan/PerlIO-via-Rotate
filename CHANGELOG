@@ -1,3 +1,6 @@
+0.03	10 July 2002
+	Migrated to the PerlIO::via:: namespace.
+
 0.02	9 July 2002
 	Fixed some documentation nits reported by Rafael Garcia-Suarez.  Added
 	some more explanation as to why the eval module approach was taken.

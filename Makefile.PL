@@ -10,11 +10,11 @@ warn <<EOD unless $Config{useperlio};
 EOD
 
 WriteMakefile (
- NAME		=> "PerlIO::Via::Rotate",
+ NAME		=> "PerlIO::via::Rotate",
  ($[ >= 5.005) ?
  (AUTHOR	=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
   ABSTRACT	=> 'PerlIO Layer for rotational deviation') : (),
- VERSION_FROM	=> 'lib/PerlIO/Via/Rotate.pm',
+ VERSION_FROM	=> 'lib/PerlIO/via/Rotate.pm',
  PREREQ_PM	=> {
                    },
 );
