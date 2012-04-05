@@ -14,13 +14,13 @@ BEGIN {				# Magic Perl CORE pragma
 
 use strict;
 use warnings;
-use Test::More tests => 11;
+use PerlIO::via::Rotate ':all';
 
-BEGIN { use_ok('PerlIO::via::Rotate',':all') }
+use Test::More tests => 10;
 
-my $file = 'test.rot13';
+my $file= 'test.rot13';
 
-my $decoded = <<EOD;
+my $decoded= <<EOD;
 This is a test for rotated text that has hardly any special characters in it
 but which is nonetheless an indication of the real world.
 
@@ -31,7 +31,7 @@ And so on and so on.
 And a signature
 EOD
 
-my $encoded = <<EOD;
+my $encoded= <<EOD;
 Guvf vf n grfg sbe ebgngrq grkg gung unf uneqyl nal fcrpvny punenpgref va vg
 ohg juvpu vf abarguryrff na vaqvpngvba bs gur erny jbeyq.
 
@@ -73,3 +73,4 @@ ok( close( $in ),			'close decoding handle' );
 # Remove whatever we created now
 
 ok( unlink( $file ),			"remove test file '$file'" );
+1 while unlink $file; # multiversioned filesystems

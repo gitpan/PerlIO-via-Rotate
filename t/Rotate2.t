@@ -14,9 +14,9 @@ BEGIN {				# Magic Perl CORE pragma
 
 use strict;
 use warnings;
-use Test::More tests => 11;
+use PerlIO::via::Rotate '13';
 
-BEGIN { use_ok('PerlIO::via::Rotate',13) }
+use Test::More tests => 10;
 
 my $file = 'test.rot13';
 
@@ -73,3 +73,4 @@ ok( close( $in ),			'close decoding handle' );
 # Remove whatever we created now
 
 ok( unlink( $file ),			"remove test file '$file'" );
+1 while unlink $file; # multiversioned filesystems

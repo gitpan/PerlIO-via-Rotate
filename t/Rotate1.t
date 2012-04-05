@@ -14,13 +14,13 @@ BEGIN {				# Magic Perl CORE pragma
 
 use strict;
 use warnings;
-use Test::More tests => 11;
+use PerlIO::via::Rotate;
 
-BEGIN { use_ok('PerlIO::via::Rotate') }
+use Test::More tests => 10;
 
-my $file = 'test.rot13';
+my $file= 'test.rot13';
 
-my $decoded = <<EOD;
+my $decoded= <<EOD;
 This is a test for rotated text that has hardly any special characters in it
 but which is nonetheless an indication of the real world.
 
@@ -31,7 +31,7 @@ And so on and so on.
 And a signature
 EOD
 
-my $encoded = <<EOD;
+my $encoded= <<EOD;
 Guvf vf n grfg sbe ebgngrq grkg gung unf uneqyl nal fcrpvny punenpgref va vg
 ohg juvpu vf abarguryrff na vaqvpngvba bs gur erny jbeyq.
 
@@ -45,15 +45,14 @@ EOD
 # Create the encoded test-file
 
 ok(
- open( my $out,'>:via(PerlIO::via::rot13)', $file ),
+ open( my $out, '>:via(PerlIO::via::rot13)', $file ),
  "opening '$file' for writing"
 );
 
-ok( (print $out $decoded),		'print to file' );
+ok( ( print $out $decoded ),		'print to file' );
 ok( close( $out ),			'closing encoding handle' );
 
 # Check encoding without layers
-
 {
 local $/ = undef;
 ok( open( my $test,$file ),		'opening without layer' );
@@ -73,3 +72,4 @@ ok( close( $in ),			'close decoding handle' );
 # Remove whatever we created now
 
 ok( unlink( $file ),			"remove test file '$file'" );
+1 while unlink $file; # multiversioned filesystems
