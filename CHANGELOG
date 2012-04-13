@@ -1,3 +1,7 @@
+0.08	13 April 2012
+	Added VERSION class method to by pass module version check altogether
+	(as suggested by Ribasushi).
+
 0.07    5 April 2012
         Brought up to date with current code esthetics.  Verified it runs on
         5.14.2, threaded and unthreaded.  Fixed problem in test-suite that

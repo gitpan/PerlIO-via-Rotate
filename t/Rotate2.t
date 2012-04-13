@@ -14,7 +14,7 @@ BEGIN {				# Magic Perl CORE pragma
 
 use strict;
 use warnings;
-use PerlIO::via::Rotate '13';
+use PerlIO::via::Rotate 13;
 
 use Test::More tests => 10;
 

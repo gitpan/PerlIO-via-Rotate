@@ -1,6 +1,6 @@
 package PerlIO::via::Rotate;
 
-$VERSION= '0.07';
+$VERSION= '0.08';
 
 # be strict and do everything on octets
 use strict;
@@ -113,6 +113,12 @@ SRC
 } #import
 
 #-------------------------------------------------------------------------------
+#  IN: 1 class
+#      2 numeric value to check
+
+sub VERSION { 1 } #VERSION
+
+#-------------------------------------------------------------------------------
 #  IN: 1 class to bless with
 #      2 mode string (ignored)
 #      3 file handle of PerlIO layer below (ignored)
@@ -160,6 +166,7 @@ PerlIO::via::Rotate - PerlIO layer for encoding using rotational deviation
 =head1 SYNOPSIS
 
  use PerlIO::via::Rotate;                 # assume rot13 only
+ use PerlIO::via::Rotate 17;              # only a single rotation
  use PerlIO::via::Rotate qw( 13 14 15 );  # list rotations (rotxx) to be used
  use PerlIO::via::Rotate ':all';          # allow for all rotations 0..26
 
@@ -171,7 +178,7 @@ PerlIO::via::Rotate - PerlIO layer for encoding using rotational deviation
 
 =head1 VERSION
 
-This documentation describes version 0.07.
+This documentation describes version 0.08.
 
 =head1 DESCRIPTION
 
@@ -184,9 +191,7 @@ The default rotation is "13".  Commonly this type of encoding is referred to
 as "rot13" encoding.  However, any rotation between 0 and 26 inclusive are
 allowed (albeit that rotation 0 and 26 don't change anything).  You can
 specify the rotations you would like to use B<as strings> in the -use-
-statement.  Please note that more recent versions of Perl interprete pure
-numerical values as a minimum value of the version of the module to be loaded.
-Hence any desired rotation values need to be specified as string.
+statement
 
 The special keyword ":all" can be specified in the -use- statement to indicate
 that all rotations between 0 and 26 inclusive should be allowed.
@@ -212,6 +217,10 @@ L<PerlIO::via::QuotedPrint>, L<PerlIO::via::StripHTML>.
 =head1 ACKNOWLEDGEMENTS
 
 Inspired by Crypt::Rot13.pm by Julian Fondren.
+
+Also thanks to Ribasushi for pointing out at the first Niederrhein PM meeting
+in 10 years, that the module version check is done by UNIVERSAL::VERSION, and
+that you can bypass this by providing your own VERSION class method.
 
 =head1 COPYRIGHT
 
